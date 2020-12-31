@@ -1,0 +1,11 @@
+
+opencage - github
+geonames trig79 / Arsenal1!
+open exchange rates Arsenal1!
+fixer.io [exchange rates] Arsenal1! e34681d0d807f096187656c3d2faf219
+amadeus Arsenal1
+newsAPI Arsenal1! // Your API key is: 6b4e398da447479c8488c06d21f9fdb2
+aviationstack Arsenal1 bb4dbf54397817556387c703cfcd0a68
+opentripmap Arsenal1 5ae2e3f221c38a28845f05b6d98d41d2deae7f64145d55c3e0f494d4   
+AirLabs nosign in: d939cd6e-8a70-4aff-b5c5-09fdd36c903d useless heavilily restricted
+Triposo: Arsenal1 / ID: IHXXGXVO / apikey: ecdqibco36o5stpe51xpidnm130curom

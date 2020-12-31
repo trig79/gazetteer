@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+	<link rel="manifest" href="../../site.webmanifest"> 
+
+	<title>Martins Gazatteer</title>
+	
+	<link rel="icon" href="#">
+	<!-- Leafletjs StyleSheet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+	<!-- bootstrapcdn -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
+	<link rel="stylesheet" href="./css/portrait.css">
+	<link rel="stylesheet" href="./css/landscape.css">
+	<!-- marker cluster -->
+	<link rel="stylesheet" href="./node_modules/leaflet.markercluster/dist/MarkerCluster.css">
+	<link rel="stylesheet" href="./node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
+
+</head>
+
+<body>
+	<div class="loader-div"  >
+		<img id=”preloader” class="loader" src="./images/preloader2.gif">
+	</div>
+	<form class="search-input-container">
+		<table id="search-input-container-table">
+			<tr><img 	src="./images/search.svg" 	class="search-icon" 		alt="search icon"></tr>
+			<tr><input 	id="autocomplete" 			class="searchInput" 		type="text"  placeholder="Country..." ></tr>
+			<tr><img 	src="./images/close.svg" 	class="search-clear-icon" 	alt="clear icon"></tr>
+		</table>
+	</form>
+	<form class="search-dropdown-container">
+		<table id="search-dropdown-container-table">
+			<tr><img 	src="./images/search.svg" 	class="search-icon" 		alt="search icon"></tr>
+			<tr id="dropdown-menu"><select id="dropdown-menu-list" class="searchInput" name="dropdown-menu-list"></select></tr>
+		</table>
+	</form>
+
+	
+	<nav>
+		<div class="burger">
+			<img src="./images/menu-24px.svg" alt="">
+		</div>
+		<ul class="nav-links-container">
+			<li class="nav-info-icon">
+				<img src="./images/info2.svg" 		class="nav-link-icons" >
+			</li>
+			<li id="nav-weather-icon">
+				<img src="./images/cloudy2.svg" 	class="nav-link-icons"  >
+			</li>
+			<li>
+				<img src="./images/covid-19.svg" 	class="nav-link-icons" id="nav-covid-19-icon">
+			</li>
+			<li>
+				<img src="./images/exchange2.svg" 	class="nav-link-icons" id="nav-exrate-icon">
+			</li>
+			<li>
+				<img src="./images/news.svg" 		class="nav-link-icons" id="nav-news-icon">
+			</li>
+		</ul>
+	</nav>
+	
+	<div id="mapid"></div>
+	
+	
+	<main>
+	
+
+		<section class="information-section">
+
+			<img src="./images/close.svg" class="info-clear-icon" alt="clear icon">
+			<img src="./images/info2.svg" class="info-icon" 	  alt="info icon">
+			<div class="info-div-1">
+				<div class="flag-icon">
+					<img src="./images/flag_plain.svg" class="flag-icon" alt="flag icon">
+				</div>
+				<h5 class="country-name">Country Name Here</h5>
+				<h5 class="capital-name">Capital Name Here</h5>
+				<h5 class="triposo-snippet">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus error, quisquam vel omnis sed temporibus excepturi, illum vitae beatae possimus accusantium corporis doloremque, ipsa hic consequatur dolore ex ea mollitia.</h5>
+			</div>
+			<div class="info-div-2">
+				<div class="clock-display">
+				<h5>Current Time</h5>
+				<div class="clock-field">
+					<p class="hours">88</p>
+					<p class="colon">:</p>
+					<p class="minutes">88</p>
+					<p class="colon">:</p>
+					<p class="seconds">88</p>
+				</div>
+			</div>
+			<div class="info-population-container">
+				<h5>Population:</h5>	
+				<h5 class="country-population">Population Here</h5>
+			</div>
+			<div class="info-latlon-container">
+			<h5 class="country-latlon">Lat Coords Here</h5>
+		</div>
+		<!-- <h5 class="txtLon">Lon Coords Here</h5> -->
+		<div class="info-currency-container">
+			<h5 class="country-currency-name">Currency Name Here</h5>
+		</div>
+	</div>
+</section>
+
+
+	<section class="weather-info-section">
+		<img src="./images/close.svg" 	  class="weather-clear-icon" alt="clear icon">
+		<img src="./images/cloudy2.svg" class="cloud-icon" 	  alt="cloud icon">
+		<h3>Weather Information</h3>
+		
+		<div class="current-weather-div">
+			<table>
+				<tr><td class="column1" id="current-weather-title1">Current Weather:</td>
+					<td class="column2" id="current-weather-cloud-icon"><img src="./images/cloudy2.svg" class="current-weather-cloud-icon" 	  alt="cloud icon"></td>
+					<td class="column3" id="current-weather-title2"><h5>Real</h5><h5>Feel</h5></td>
+					<td class="column4" id="current-weather-wind-icon"><img src="./images/wind.svg" class="current-weather-wind-icon" 	  alt="wind icon"></td>	</tr>
+					
+					<tr><td class="column1" id="current-weather-text">Description</td>
+						<td class="column2" ><h5 id="current-weather-temp">25C</h5></td>
+						<td class="column3" ><h5 id="current-weather-feelslike">19C</h5></td>
+						<td class="column4" ><h5 id="current-weather-wind">10.1 mph</h5></td>	</tr>
+					</table>
+				</div>
+				
+				
+				<div class="forecast-weather-div">
+					<table>
+						<tr><td class="column5" id="forecast-weather-title1"><h4>Forecast:</h4>	</td>
+							<td class="column6" id="forecast-weather-title2"><h5>Today</h5>		</td>
+							<td class="column7" id="forecast-weather-title3"><h5>Day +1</h5>	</td>
+				<td class="column8" id="forecast-weather-title4"><h5>Day +2</h5>	</td>	</tr>
+				
+			<tr><td class="column5" id="">	</td>
+				<td class="column6" id="forecast-weather-cloud-icon-day1">	<img src="./images/cloudy2.svg" class="forecast-weather-cloud-icon-day"   alt="weather icon"></td>
+				<td class="column7" id="forecast-weather-cloud-icon-day2">	<img src="./images/cloudy2.svg" class="forecast-weather-cloud-icon-day"   alt="weather icon"></td>
+				<td class="column8" id="forecast-weather-cloud-icon-day3">	<img src="./images/cloudy2.svg" class="forecast-weather-cloud-icon-day"   alt="weather icon"></td></tr>
+				
+			<tr><td class="column5" class="forecast-weather-text">	<h5>Max Temp</h5></td>
+				<td class="column6" id="">	<h5 id="forecast-weather-maxtemp_today">00 C</h5></td>
+				<td class="column7" id="">	<h5 id="forecast-weather-maxtemp_today1">00 C</h5></td>
+				<td class="column8" id="">	<h5 id="forecast-weather-maxtemp_today2">00 C</h5></td></tr>
+				
+				<tr><td class="column5" class="forecast-weather-text">	<h5>Min Temp</h5></td>
+					<td class="column6" id="">	<h5 id="forecast-weather-mintemp_today">00 C</h5></td>
+					<td class="column7" id="">	<h5 id="forecast-weather-mintemp_today1">00 C</h5></td>
+					<td class="column8" id="">	<h5 id="forecast-weather-mintemp_today2">00 C</h5></td></tr>
+					
+					<tr><td class="column5" class="forecast-weather-text">	<h5>Sunrise</h5></td>
+						<td class="column6" id="">	<h5 id="forecast-weather-sunrise_today">88:88</h5></td>
+						<td class="column7" id="">	<h5 id="forecast-weather-sunrise_today1">88:88</h5></td>
+						<td class="column8" id="">	<h5 id="forecast-weather-sunrise_today2">88:88</h5></td></tr>
+
+						<tr><td class="column5" class="forecast-weather-text">	<h5>Sunset</h5></td>
+				<td class="column6" id="">	<h5 id="forecast-weather-sunset_today">88:88</h5></td>
+				<td class="column7" id="">	<h5 id="forecast-weather-sunset_today1">88:88</h5></td>
+				<td class="column8" id="">	<h5 id="forecast-weather-sunset_today2">88:88</h5></td></tr>
+				</table>
+				
+
+			</div>
+	</section>
+
+	<section class="exchange-rate-section">
+		<img src="./images/close.svg" 	  class="exchange-clear-icon" alt="clear icon">
+		<img src="./images/exchange2.svg" class="exchange-icon" 	  alt="exchange icon">
+		<h3>Top 10 Traded</h3><h3>Currency Exchange Rates</h3>
+
+		<div class="exchangeInfo-div">
+				<p id="base-currency"></p>
+			<div class="exchange-table">
+				<div class="exrate-detail">
+					<img src="./images/flag_usa.svg" 	class="exrate-flags" alt="USA Flag">
+					<h5 id="txt-usd"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_euro.svg" 	class="exrate-flags" alt="EUR Flag">
+					<h5 id="txt-eur"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_uk.svg" 	class="exrate-flags" alt="UK Flag">
+					<h5 id="txt-gbp"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_australia.svg" class="exrate-flags" alt="Australia Flag">
+					<h5 id="txt-aud"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_japan.svg" 	class="exrate-flags" alt="Japan Flag">
+					<h5 id="txt-jpy"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_canada.svg" class="exrate-flags" alt="Canada Flag">
+					<h5 id="txt-cad"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_swiss.svg" 	class="exrate-flags" alt="Switzerland Flag">
+					<h5 id="txt-swiss"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_china.svg" 	class="exrate-flags" alt="China Flag">
+					<h5 id="txt-china"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_nz.svg" 	class="exrate-flags" alt="New Zealand Flag">
+					<h5 id="txt-nzd"></h5>
+				</div>
+				<div class="exrate-detail">
+					<img src="./images/flag_hongkong.svg" 	class="exrate-flags" alt="Hong Kong Flag">
+					<h5 id="txt-hkd"></h5>
+				</div>
+			</div>	
+		</div>
+	</section>
+	
+	<section class="covid-section">
+		<!-- <div class="flag-icon"></div> -->
+		<img src="./images/close.svg" class="covid-clear-icon" alt="clear icon">
+		<img src="./images/covid-19.svg" class="covid-icon" id="covid19">
+		<h3>Covid-19 Data Summary</h3>
+		<div class="covid-chart-div">
+			<div class="covid-total-header"></div>
+			<div id="covid-chart-container">
+				<canvas id="covid-chart"></canvas>
+			</div>
+			<div id="covid-totals-text"></div>
+		</div>
+	</section>
+	
+	<section class="news-info-section">
+		<img src="./images/close.svg" class="news-clear-icon" alt="clear icon">
+		<img src="./images/news.svg" class="news-icon" alt="news icon">
+		<h3 id="news-info-header">Latest News Head Lines</h3>
+		<div id="news-div">
+			<!-- HTML inserted via jQuery in api.js file. -->
+		</div>
+	</section>
+	
+</main>
+
+	<div id="landscape-restricted">
+		<h2>We are Sorry, but Landscape mode is not supported here</h2> 
+		<h2>The device must have a min pixel ratio of 600px</h2> 
+		<h3>But hey don't worry you can still enjoy in portrait mode.</h3> 
+	</div>
+	
+	<!-- Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- leafletjs -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+	<!-- leaflet-pip -->
+	<script src="https://cdn.jsdelivr.net/npm/@mapbox/leaflet-pip@1.1.0/leaflet-pip.min.js"></script>
+	<!-- Day Night Layer -->
+	<script src=" https://unpkg.com/@joergdietrich/leaflet.terminator@1.0.0/L.Terminator.js"></script>
+	
+	<!-- chartJs -->
+	<script src="./node_modules/chart.js/dist/Chart.bundle.js"></script>
+	<!-- marker cluster -->
+	<script src="./node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+	<script src="./resources/airportData.js"></script>
+	<!-- Auto Complete -->
+	<script src="./resources/autoComplete.js"></script>
+	<script src="./node_modules/jquery-autocomplete/jquery.autocomplete.js"></script>
+	
+	<!-- geoJson imports -->
+	<script src="./resources/culturalVector.js"></script>
+	<script src="./resources/covidJson.js"></script>
+	<script src="./resources/countriesSmallGeoJson.js"></script>
+	
+	<!-- My Functions -->
+	<script src="./js/leafletjs.js"></script>
+	<script src="./js/navbar.js"></script>
+	<script src="./js/api.js"></script>
+	<script src="./js/graphs.js"></script>
+		
+	</body>
+</html>

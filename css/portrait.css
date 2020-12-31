@@ -1,0 +1,596 @@
+/* Contents:
+|| SEARCH BAR
+|| NAV VERTICAL BAR
+|| INFORMATION SECTIONS (DIVS) */
+
+@media screen and (orientation: portrait) {
+	.loader-div{
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		text-align: center;
+		/* top: 40%; */
+		background-color:rgba(235, 229, 229, 0.836);
+		z-index: 99999; 
+		pointer-events: none;
+	}
+	.loader {
+		height: 10%;
+		width: auto;
+		margin: 50% 40%;
+		pointer-events: none;
+	}
+
+	.leaflet-control-layers{
+		background: transparent;
+	}
+	.leaflet-retina .leaflet-control-layers-toggle{
+		background-image: url(../images/layers.svg);
+		background-size: 34px;
+	}
+	.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar{
+		border: none;
+	}
+	.leaflet-touch .leaflet-bar a {
+		width: 30px;
+		height: 30px;
+	}
+	.leaflet-bar a{
+		background-color: rgba(235, 229, 229, 0)
+	} 
+	.leaflet-control-zoom-in{
+		background-image: url(../images/circle-plus.svg);
+		background-size: contain;
+		margin-left: 18%;
+		}	
+	.leaflet-control-zoom-out{
+		background-image: url(../images/circle-minus.svg);
+		background-size: contain;
+		margin-left: 18%;
+		margin-top: 10%;
+	}
+	.leaflet-right .leaflet-control{
+		float: unset;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: 'Poppins', sans-serif;
+	} 
+	html {
+		font-size: 62.5%;
+		line-height: 62.5%;
+	}
+
+	#mapid {
+		height: 100%;
+		width: 100%; 
+		position: fixed;
+		z-index: -1;
+	}
+
+	#landscape-restricted{
+		display: none;
+		z-index: 100;
+		position: fixed;
+	}
+	/* css class for leafletJS map and layer selectors */
+	.leaflet-top leaflet-right{
+		position: absolute;
+	}
+
+	/* || SEARCH BAR */
+	.search-input-container {
+		display: none;
+	}
+	
+	/* .search-input-container,  */
+	.search-dropdown-container{
+		margin-top: 1.8vh;
+		left: 15vw;
+		min-width: 100px;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		font-size: 1.6rem;
+		/* background-color:rgba(235, 229, 229, 0.836); */
+
+	}
+	/* .search-input-container table tr,  */
+	.search-dropdown-container table tr{
+		padding-right: 100px;
+	}
+
+	.search-icon {
+		width: 2rem;
+		margin-right: 10px;
+		cursor: pointer;
+		}
+	.search-clear-icon {
+		width: 1.8rem;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+
+	/* .searchInput,  */
+	#dropdown-menu-list {
+		height: 4vh;
+		width: 100%;
+		font-size: 1.6rem;
+		background: transparent;
+		border: none;
+		border-bottom: 3px solid #000;
+
+	}
+	#dropdown-menu-list option {
+		font-size: 1rem;
+	}
+	/* .searchInput {
+		border: none;
+		background-color: none;
+	} */
+	/* .searchInput:hover, .search:focus {
+		border: 1.5px solid #009688;
+		background-color: white;
+	} */
+
+	/* || AUTOCOMPLETE FOR Search Bar */
+	.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+	.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+	.autocomplete-selected { background: #F0F0F0; }
+	.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+	.autocomplete-group { padding: 2px 5px; }
+	.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+	
+
+
+/* || NAV VERTICAL BAR */
+	.nav-links-container {
+		position: absolute;
+		left: 0px;
+		height: 60%;
+		/* width: 20%; */
+		top:8vh;
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		text-decoration: none;
+		transform: translateX(-100%);
+		transition: transform 0.3s ease-in;
+	}
+	.nav-active{
+		transform: translateX(0%);
+	}
+	@keyframes navLinkFade {
+		from{
+			opacity: 0;
+			transform: translateX(-100%);
+		}
+		to{
+			opacity: 1;
+			transform: translateX(0%);
+		}
+	}
+	.nav-link-icons{
+		width: 40px;
+		height: 40px;
+		margin-left: 2vw;
+		margin-top: 2vh;
+		padding: .5rem;
+		background-color:rgba(235, 229, 229, 0.836);
+		box-shadow: 0px 0px 8px 2px grey;
+		border-radius: 15%;
+	}
+	.burger img {
+		position: absolute;
+		width: 40px;
+		height: auto;
+		margin-top: 1vh;
+		margin-left: 2vw;
+	}
+
+
+/* || INFORMATION SECTIONS*/
+	.information-section, .weather-info-section, .covid-section, .exchange-rate-section, .news-info-section {
+		position: absolute;
+		overflow: scroll;
+		height: 40%;
+		width: 94%;
+		bottom: 0%;
+		margin: 3%;
+		padding: 3%;
+		background-color:rgba(235, 229, 229, 0.836);
+		box-shadow: 0px 0px 8px 2px grey;
+		border-radius: 3%;
+	}
+	.information-section  {
+		transform: translateX(0%);
+		transition: transform 0.5s ease-in;
+	}
+	.information-section-translate{
+		transform: translateX(-110%);
+	}
+	.info-div-1 {
+		width: 100%;
+		margin-top: 2%;
+		display: flex;
+		flex-direction: column;
+		overflow-y: scroll;
+	}
+	.info-div-2 {
+		width: 100%;
+		text-align: center;
+		margin-top: 2%;
+		display: flex;
+		justify-content: space-between;
+		overflow-y: scroll;
+	}
+	.clock-field {
+		display: flex;
+		text-align: center;
+		align-content: center;
+		justify-content: center;
+		
+	}
+	.clock-display, .info-population-container, .info-latlon-container, .info-currency-container{
+		padding: 0% 1%;
+	}
+	.info-population-container{
+		display: block;
+	}
+
+	h5.country-name, h5.capital-name{
+		text-align: center;
+	}
+
+/* Weather DIV */
+	.weather-info-section {
+		transform: translateX(-110%);
+		transition: transform 0.5s ease-in;
+	}
+	.weather-info-section-translate  {
+		transform: translateX(0%);
+		
+	}
+	.weather-info-section h3{
+		text-align: center;
+	}
+	.current-weather-div{
+		top: 12%;
+		width: 100%;
+	}
+	.current-weather-cloud-icon{
+		height: 50px;
+		width: auto;
+	}
+	.current-weather-wind-icon{
+		height: 40px;
+		width: auto;
+	}
+	.current-weather-div table{
+		width: 100%;
+		border-bottom: 1px solid #000 ;
+	}
+	.forecast-weather-div table{
+		width: 100%;
+		
+	}
+	.column1, .column5{
+		width: 46%
+	}
+	.column2, .column3, .column4, .column6, .column7, .column8{
+		width: 18%;
+		text-align: center;
+	}
+
+	#current-weather-title1{
+		font-size: 1.5rem;
+		font-weight: 500;
+	}
+	#current-weather-text{
+		font-size: 1.4rem;
+		text-align: right;
+		padding-bottom: .7rem;
+		padding-right: 2rem;
+	}
+	#current-weather-title2{
+		font-size: 1.3rem;
+		font-weight: 600;
+	}
+	.forecast-weather-text{
+		text-align: right;
+	}
+	.forecast-weather-cloud-icon-day{
+		width: 40px;
+		height: auto;
+	}
+	#weather-img {
+		padding: 0rem;
+	}
+
+	/* Covid Div */
+	.covid-section {
+		transform: translateX(-110%);
+		transition: transform 0.5s ease-in;
+	}
+	.covid-section-translate{
+		transform: translateX(0%);
+	}
+	.covid-section h3{
+		text-align: center;
+	}
+	.covid-chart-div{
+		width: 100%;
+		height: 80%;
+		display: flex;
+		text-align: center;
+		margin-top: 7%;
+	}
+	#covid-chart-container {
+		position: relative;
+		width:55%;
+		height: 85%;
+		margin-top: 5%;
+	}
+	#covid-totals-text {
+		width: 35%;
+		border: 1px;
+	}
+
+
+/* Exchange Div */
+	.exchange-rate-section {
+		transform: translateX(-110%);
+		transition: transform 0.5s ease-in;
+	}
+	.exchange-rate-section-translate{
+		transform: translateX(0%);
+	}
+	.exchangeInfo-div{
+		margin-top: 6%;
+	}
+	.exchange-rate-section h3{
+		text-align: center;
+	}
+	.exchange-table{
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.exrate-detail {
+		width: 17%;
+		padding: 2%;
+		text-align: center;
+	}
+
+/* News Div */
+	.news-info-section {
+		transform: translateX(-110%);
+		transition: transform 0.5s ease-in;
+	}
+	.news-info-section-translate{
+		transform: translateX(0%);
+	}
+	.news-info-section h3{
+		text-align: center;
+	}
+	#news-div{
+		margin-top: 14%;
+	}	
+	.news-articles{
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.news-image {
+		width:35%;
+		height: auto;
+	}
+	.news-link { 
+		font-size: 1rem; 
+		color:black;	
+	}
+	.news-title{ 
+		font-size: 1.6rem;
+	}
+	.news-description{ 
+		font-size: 1.2rem;
+		float: right;
+		width: 65%;
+		padding-left: 1%;
+	}
+
+	
+	.info-clear-icon, .weather-clear-icon, .covid-clear-icon, .exchange-clear-icon, .news-clear-icon {
+		position: absolute;
+		top: 2vh;
+		right: 3vw;
+		width: 2rem;
+		cursor: pointer;
+	}
+
+/* Search ICONS TO BEADDED */
+	.info-icon, .cloud-icon, .exchange-icon , .news-icon, .covid-icon{
+		width:10%;
+		height: auto;
+		position: absolute;
+		top: 2vh;
+		left: 3vw;
+		/* background-color:rgba(235, 229, 229, 0.836); */
+	}
+	.flag-icon {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 45%;
+		height: auto;
+	}
+
+/* Population and Covid Layers */
+
+	.info-legend {
+		width: 40%;
+		padding: 5%;
+		line-height: 18px;
+		text-align: left;
+		color: #555;
+		background-color:rgba(235, 229, 229, 0.836);
+		box-shadow: 0px 0px 8px 2px grey;
+		border-radius: 3%;
+	}
+	.info-legend i {
+		width: 18px;
+		height: 18px;
+		float: left;
+		margin-right: 8px;
+		opacity: 0.7;
+	}	
+}
+
+@media screen and (min-width: 300px) and (min-height: 500px) and (orientation: portrait){
+	/* .search-input-container,  */
+	.search-dropdown-container{
+		/* margin-top: 1.8vh;
+		left: 15vw; */
+		min-width: unset;
+		width:60%;
+		/* position: absolute;
+		display: flex;
+		align-items: center;
+		font-size: 1.6rem; */
+		/*font-size: 2rem;*/
+	}
+}
+
+@media screen and (min-width: 600px) and (orientation: portrait){
+
+	/* .search-input-container,  */
+	.search-dropdown-container{
+		/* margin-top: 1.8vh;
+		left: 15vw;
+		min-width: 100px; */
+		max-width: 300px;
+		/* position: absolute;
+		display: flex;
+		align-items: center; */
+		font-size: 1.8rem;
+	}	
+	.search-icon {
+		width: 2.4rem;
+		cursor: pointer;
+	}
+
+/* || AUTOCOMPLETE FOR Search Bar */
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; font-size: 1.8rem;}
+
+	.nav-link-icons{
+		width: 55px;
+		height: 55px;
+		/* margin-left: 2vw;
+		margin-top: 2vh;
+		padding: .5rem;
+		background-color:rgba(235, 229, 229, 0.836);
+		box-shadow: 0px 0px 8px 2px grey;
+		border-radius: 15%; */
+	}
+	.burger img {
+		/* position: absolute; */
+		width: 55px;
+		/* height: auto; */
+		margin-top: 1.4vh;
+		/* margin-left: 2vw; */
+	}
+
+	.information-section, .weather-info-section, .covid-section, .exchange-rate-section, .news-info-section {
+		/* position: absolute;
+		overflow: scroll;
+		height: 40%; */
+		width: 50%;
+		/* bottom: 0%;
+		margin: 3%;
+		padding: 3%;
+		background-color:rgba(235, 229, 229, 0.836);
+		box-shadow: 0px 0px 8px 2px grey;
+		border-radius: 3%; */
+	}
+	
+}
+
+@media screen and (min-width: 1000px) and (orientation: portrait){
+
+	.information-section, .weather-info-section, .covid-section, .exchange-rate-section, .news-info-section {
+		/* position: absolute;
+		overflow: scroll;*/
+		height: 25%; 
+		/*width: 50%;
+		bottom: 0%;
+		margin: 3%;
+		padding: 3%;
+		background-color:rgba(235, 229, 229, 0.836);
+		box-shadow: 0px 0px 8px 2px grey;
+		border-radius: 3%; */
+	}
+	.search-input-container {
+		display: unset
+	}
+	.search-dropdown-container {
+		display: none;
+	}
+
+	.search-input-container {
+		margin-top: 1.8vh;
+		left: 15vw;
+		min-width: 100px;
+		width: 30%;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		font-size: 1.6rem;
+	}
+	.search-input-container table tr{
+		padding-right: 100px;
+	}
+	
+		.search-icon {
+			width: 2rem;
+			margin-right: 10px;
+			cursor: pointer;
+		}
+		.search-clear-icon {
+			width: 1.8rem;
+			margin-right: 10px;
+			cursor: pointer;
+		}
+		.searchInput {
+			/* border: 1px solid grey;
+			border-radius: 5px; */
+			height: 4vh;
+			width: 100%;
+			background: transparent;
+			border: none;
+			border-bottom: 3px solid #000;
+			/* padding: 2px 23px 2px 30px;
+			outline: 0;
+			background-color: #f5f5f5; */
+		}
+		/* .searchInput {
+			border: none;
+			background-color: none;
+			
+		} */
+		.searchInput:hover, .search:focus {
+			border: 1.5px solid #009688;
+			background-color: white;
+		}
+	
+}
+
+
+
+
+
+
+
