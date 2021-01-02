@@ -123,7 +123,7 @@ const restCountriesSearch = (country, alpha2code, functionCalled) => {
         $('.capital-name').html(`<h5 class="capital-name"> ${result['rest_countries'][0]['capital']} </h5>`);
         $('.nav-info-icon').html('<img src=' + flagIcon + ' class="nav-link-icons" >')
         $('.flag-icon').html('<img src=' + flagIcon + ' class="flag-icon" >')
-
+ 
         switch(functionCalled) {
             case 'latLonSearch' :     
                 //openWeather(capital, functionCalled);
@@ -298,7 +298,8 @@ const openCage = (lat,lon, functionCalled) => {
             let country = result['open_cage'][0]['country']
             let alpha2code = result['open_cage'][0]['countryCode']
             let alpha3code      = result['open_cage'][0]['currency']['iso_code'];                                    
-            //mymap.setView(new L.LatLng(lat, lon), 4) - creates unstable behavior in desktop mode, on hover
+            mymap.setView(new L.LatLng(lat, lon), 4) // creates unstable behavior in desktop mode, on hover
+        
             switch(functionCalled) {
                 case 'latLonSearch' :     
                     restCountriesSearch(country, alpha2code, functionCalled)
@@ -347,6 +348,7 @@ const covid19api = (alpha2code) => {
             $totalRecover   = result['covid_19']['total_recovered'];
             $recentConf     = result['covid_19']['new_confirmed'];
 
+            
             //sends data to generate chart.
             totalCovidChart($totalDeath, $totalRecover, $recentConf)
             $('.covid-total-header').html('');

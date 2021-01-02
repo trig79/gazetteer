@@ -1,8 +1,12 @@
 //Creates Chart for App using chart.js plugin
 
 const ctx = document.getElementById('covid-chart').getContext('2d');
+let chart;
+let chartExist;
 const totalCovidChart = (totalDeath, totalRecover, recentConf) => {
-const chart = new Chart(ctx, {
+    if(chartExist) {chart.destroy()};
+    chartExist = true
+chart = new Chart(ctx, {
     // The type of chart we want to create, Nb for stacked charts to work it need multiple datasets
     //type: 'horizontalBar',
     type: 'bar',

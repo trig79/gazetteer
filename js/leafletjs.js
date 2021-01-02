@@ -91,9 +91,9 @@ populationLegend.onAdd = function (mymap) {
     //must itrate through real grades as mentioned in populationLayerColors for function to work. but displayed grades are used for visuals on the map.
     var div = L.DomUtil.create('div', 'info-legend'),
         grades = [0, 20000000, 40000000, 60000000, 80000000, 100000000, 120000000],
-        displayedGrades = [0, '2m', '4m', '6m', '8m', '10m', '12m'];
+        displayedGrades = [0, '2', '4', '6', '8', '10', '12'];
 
-        div.innerHTML += `<h5 id="legend-pop-header">Population</h5>`
+        div.innerHTML += `<h5 id="legend-pop-header">Population (millions)</h5>`
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
@@ -284,7 +284,7 @@ const topCities = (cityMarkers) => {
     if(cityCluster){ mymap.removeLayer(cityCluster) }
     
     cityCluster = L.markerClusterGroup({
-        maxClusterRadius: 100,
+        maxClusterRadius: 60,
     });
     for ( let i = 0; i < $cityMarkers.length; ++i ){
         let popup = $cityMarkers[i].name + '<br/>' + $cityMarkers[i].snippet;
@@ -342,9 +342,6 @@ const highlightCountry = (e) => {
 /////////////////    MAP LOAD   //////////////////////
 
 const mapLoad = (lat,lng) => {
-    //coords for setting map boundaries
-    // const southWest = L.latLng(180.0,180.0);
-    // const northEast = L.latLng(-180.0, -180.0);
     const southWest = L.latLng(-90, -180);
     const northEast = L.latLng(90, 180);
     const bounds    = L.latLngBounds(southWest, northEast);
@@ -353,22 +350,24 @@ const mapLoad = (lat,lng) => {
     //minZoom prevents user zooming outside of boundary.
     mymap = L.map('mapid', { 
         zoomControl: false, 
-        minZoom: 1.4,
+        minZoom: 3,
         //dragging: !L.Browser.mobile,
         tap: !L.Browser.mobile,
         bounceAtZoomLimits: false,
         touchZoom: true,
+        
     });
     //set starting point of map to user lat/lng coords        
     mymap.setView([lat, lng], 4);
 
     //sets boundary limits of map                                     
-    mymap.setMaxBounds(bounds);    
+    mymap.setMaxBounds([[-90, -180],[90, 180]]); 
+    mymap.fitBounds([[-90, -180],[90, 180]]);    
 
     //MARKER CONFIGS
 
     //Adds user Location marker
-    const userMarker = L.marker([lat, lng], {icon: youAreHereIcon}).addTo(mymap);    
+    const userMarker = L.marker([lat, lng]).addTo(mymap);    
 
     // 6. WORLD AIRPORTS LAYER
     //marker variable can be found in cache/airportData.js
@@ -401,7 +400,7 @@ const mapLoad = (lat,lng) => {
     const openStreetMap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         noWrap: true,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
+        //maxZoom: 18,
         id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,
@@ -410,12 +409,12 @@ const mapLoad = (lat,lng) => {
 
     const lightMap = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
         noWrap: true,
-        maxZoom: 20,
+        //maxZoom: 20,
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     });
 
     const darkMap = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-        maxZoom: 20,
+        //maxZoom: 20,
         noWrap: true,
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     });
@@ -470,14 +469,15 @@ const mapLoad = (lat,lng) => {
         "World Airports"    : airportCluster,
     }
 
-    L.control.layers(baseMaps, overlayMaps).addTo(mymap);
     //zoomControl called here to allow postioning below layer icon
     L.control.zoom({ 
         position: 'topright',
         zoomInText: '',
         zoomOutText: '',   
     }).addTo(mymap);   
-
+    
+    L.control.layers(baseMaps, overlayMaps).addTo(mymap);
+    
     // LAYER EVENT 'ONADD'
     mymap.on('overlayadd', function(e){
         //console.log(e) //Bug Testing

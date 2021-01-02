@@ -8,7 +8,7 @@ include(dirname(__DIR__).'/php/dbConnection.php');
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
-$sql = " SELECT name_beta FROM restcountries";
+$sql = " SELECT name_beta FROM restcountries ORDER BY name_beta";
 
 $result = mysqli_query($mysqli, $sql); 						
 
@@ -29,5 +29,3 @@ if (mysqli_num_rows($result) > 0) {
 } else { echo ('error running autoComplete.php');}
 
 mysqli_close($mysqli);
-
-?>
