@@ -265,8 +265,7 @@ const onClickInfo = (e, functionCalled) => {
             layer.bringToFront();
         }
     } 
-    console.log(Boolean(layer))
-}
+    }
     
 const onEachFeature_initial = (feature, layer) => {
     layer.on({

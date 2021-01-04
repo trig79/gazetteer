@@ -10,22 +10,12 @@ const navSuccess = (position) => {
     let lon = position.coords.longitude.toFixed(2);
     let lat = position.coords.latitude.toFixed(2);
     mapLoad(lat,lon);   //intializes the map; located in leafletjs.js.
-    //currentTimeAPI(lat, lon);       
+    currentTimeAPI(lat, lon);       
     openCage(lat, lon, 'latLonSearch');
     //intiated dropdown country list
     dropdownList()
     //triggers country highlight for persons location
     searchBarStyle_Initial(lon, lat)
-
-
-    //bug testing....
-//     $('#news-div').append(`
-//     <div class="news-articles">\
-//     <h3 class="news-title">Mr President, I look forward to speaking with you': Joe Biden tells supporters 'nothing's going to stop us</h3>\
-//     <a href="https://news.sky.com/story/mr-president-i-look-forward-to-speaking-with-you-joe-biden-tells-supporters-nothings-going-to-stop-us-12129497" class="news-link"><img src="https://e3.365dm.com/20/11/1600x900/skynews-biden-president_5168253.jpg?20201110201436" class="news-image">\
-//     <p class="news-description">"Mr Biden said his transition to the White House is "well under way" in preparation for taking power on 20 January 2021."</p></a>\
-//     </div>\
-//  `)
 }
 
 const navError = (error) => {
@@ -51,7 +41,7 @@ const navError = (error) => {
 
 //activated when user clicks/taps on a country - Only works when a layer is loaded
 const countryOnClick = (lat, lon) => {
-    //currentTimeAPI(lat, lon);      
+    currentTimeAPI(lat, lon);      
     openCage(lat, lon, 'latLonSearch'); 
 
 }
@@ -65,7 +55,6 @@ $('.search-icon').click(function() {
 
     restCountriesSearch($country, $alpha2code, $functionCalled)
 
-    // console.log(SM)
     })
 
 //function to handle the display of preloader
@@ -109,7 +98,7 @@ const restCountriesSearch = (country, alpha2code, functionCalled) => {
             },
         
         success: function(result) {
-        console.log(result);  //Bug Testing
+        // console.log(result);  //Bug Testing
         // Removes data from the previous search to prevent incorrect display in case of only partial data return from API calls
         $('.info-population-container').html(`<h5>Population:</h5><br><h6 class="country-population">Nil Data</h6>`);
         $('.capital-name').html(`<h5 class="capital-name">Nil Data</h5>`);
@@ -126,11 +115,9 @@ const restCountriesSearch = (country, alpha2code, functionCalled) => {
  
         switch(functionCalled) {
             case 'latLonSearch' :     
-                //openWeather(capital, functionCalled);
                 weatherApi(capital, functionCalled);
             break;
             case 'countrySearch' :
-                //openWeather(capital, functionCalled);
                 weatherApi(capital, functionCalled);
             }
         preloader()
@@ -156,7 +143,7 @@ const weatherApi = (capital, functionCalled) => {
         },
     
         success: function(result) {
-            console.log(result);   //Bug Testing
+            //console.log(result);   //Bug Testing
             // Removes data from the previous search to prevent incorrect display in case of only partial data return from API calls
             $('#nav-weather-icon').html(`<img src="./images/cloudy2.svg" 	class="nav-link-icons"  >`)  
             $('#current-weather-cloud-icon').html('')  
@@ -249,7 +236,7 @@ const weatherApi = (capital, functionCalled) => {
         switch(functionCalled) {
             case 'countrySearch' :     
                 openCage(lat, lon, functionCalled)
-                //currentTimeAPI(lat, lon);
+                currentTimeAPI(lat, lon);
                 mymap.flyTo([lat, lon], 4);
                 searchBarStyle_Initial(lon, lat)
             }
@@ -260,7 +247,7 @@ const weatherApi = (capital, functionCalled) => {
             console.log(errorMessage);
             errorLog(errorMessage)
             preloader()
-            alert('Doh! something went wrong when attempting to retrieve weather information for this country. The error has been logged for investigation.  Please choose another country.')
+            alert('Something went wrong when attempting to retrieve weather information for this country. The error has been logged for investigation.  Please choose another country.')
 
         }
     })
@@ -280,7 +267,7 @@ const openCage = (lat,lon, functionCalled) => {
             functionCalled: functionCalled,
         },
         success: function(result) {
-            console.log(result);   //Bug Testing
+            // console.log(result);   //Bug Testing
             // Removes data from the previous search to prevent incorrect display in case of only partial data return from API calls
             $('.txtSide').html('');
             $('.txtSpeed').html('');
@@ -304,16 +291,16 @@ const openCage = (lat,lon, functionCalled) => {
                 case 'latLonSearch' :     
                     restCountriesSearch(country, alpha2code, functionCalled)
                     covid19api(alpha2code);
-                    //currentNews(alpha2code)
-                    //triposo(alpha2code)
-                    //triposoCities(alpha2code)
+                    currentNews(alpha2code)
+                    triposo(alpha2code)
+                    triposoCities(alpha2code)
                     exchangeRateApi(alpha3code)
                 break;
                 case 'countrySearch' :
                     covid19api(alpha2code)
-                    //currentNews(alpha2code)
-                    //triposo(alpha2code)
-                    //triposoCities(alpha2code)
+                    currentNews(alpha2code)
+                    triposo(alpha2code)
+                    triposoCities(alpha2code)
                     exchangeRateApi(alpha3code)
             }
             preloader() 
@@ -342,7 +329,7 @@ const covid19api = (alpha2code) => {
         },
 
         success: function(result) {
-            console.log(result);   //Bug Testing
+            //console.log(result);   //Bug Testing
             $totalConf      = result['covid_19']['total_confirmed'];
             $totalDeath     = result['covid_19']['total_deaths'];
             $totalRecover   = result['covid_19']['total_recovered'];
@@ -380,7 +367,7 @@ const covid19api = (alpha2code) => {
             console.log(errorMessage);
             errorLog(errorMessage)
             preloader()
-            alert('Doh! something went wrong when attempting to retrieve Covid-19 information for this country. The error has been logged for investigation.  Please choose another country.')
+            alert('Something went wrong when attempting to retrieve Covid-19 information for this country. The error has been logged for investigation.  Please choose another country.')
 
             }
     })
@@ -398,7 +385,7 @@ const currentTimeAPI = (lat, lon) => {
         },
 
         success: function(result){
-            console.log(result)  //Bug Testing
+            // console.log(result)  //Bug Testing
             //format '2020-11-05 16:18:22'
             $time = result['current_time'][0]['formatted']
 
@@ -417,7 +404,7 @@ const currentTimeAPI = (lat, lon) => {
             console.log(errorMessage);
             errorLog(errorMessage)
             preloader()
-            alert('Doh! something went wrong when attempting to retrieve current time information for this country. The error has been logged for investigation.  Please choose another country.')
+            alert('Something went wrong when attempting to retrieve current time information for this country. The error has been logged for investigation.  Please choose another country.')
 
             }
     })
@@ -434,7 +421,7 @@ const exchangeRateApi = (alpha3code) => {
         },
 
         success: function(result){
-            console.log(result)  //Bug Testing
+            // console.log(result)  //Bug Testing
             $base = result['exchange_rate_api']['base']
             $('#base-currency').html('<h5> 1 ' + $base + ' will buy you.....</h5>') 
             $usd    = result['exchange_rate_api']['rates']['USD'];
@@ -482,7 +469,7 @@ const triposo = (alpha2code) => {
         },
 
         success: function(result){
-            console.log(result)
+            // console.log(result)
             const snippet = result['triposo_country'][0]['snippet'];
             $('.triposo-snippet').html(snippet);
         },
@@ -492,7 +479,7 @@ const triposo = (alpha2code) => {
             console.log(errorMessage);
             errorLog(errorMessage)
             preloader()
-            alert('Doh! something went wrong when attempting to retrieve some information for this country. The error has been logged for investigation.  Please choose another country.')
+            alert('Something went wrong when attempting to retrieve some information for this country. The error has been logged for investigation.  Please choose another country.')
 
         }
     })
@@ -509,7 +496,7 @@ const triposoCities = (alpha2code) => {
         },
 
         success: function(result){
-            console.log(result)  //Bug Testing
+            // console.log(result)  //Bug Testing
             $cityMarkers = result['triposo_cities']
             topCities($cityMarkers)
         },
@@ -518,7 +505,7 @@ const triposoCities = (alpha2code) => {
             console.log(errorMessage);
             errorLog(errorMessage)
             preloader()
-            alert('Doh! something went wrong when attempting to retrieve some information for this country. The error has been logged for investigation.  Please choose another country.')
+            alert('Soomething went wrong when attempting to retrieve some information for this country. The error has been logged for investigation.  Please choose another country.')
 
         }
     })
@@ -536,7 +523,7 @@ const currentNews = (alpha2code) => {
         },
 
         success: function(result){
-            console.log(result)  //Bug Testing
+            // console.log(result)  //Bug Testing
             $('.news-image').remove();
             $('.news-link').remove();
             $('.news-title').remove();
@@ -590,7 +577,7 @@ const errorLog = (errorMessage) => {
         },
 
         success: function(result){
-            console.log(result)  //Bug Testing
+            //console.log(result)  //Bug Testing
         },
         error: function(xhr, status, error){
             console.log(`errorLog.php failed: ${result}`)

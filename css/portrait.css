@@ -400,9 +400,9 @@
   .news-info-section-translate {
     transform: translateX(0%);
   }
-  .news-info-section h3 {
+  /* .news-info-section h3 {
     text-align: center;
-  }
+  } */
   #news-div {
     margin-top: 14%;
   }
@@ -423,8 +423,8 @@
   }
   .news-description {
     font-size: 1.2rem;
-    float: right;
-    width: 65%;
+    /* float: right;
+    width: 65%; */
     padding-left: 1%;
   }
 
