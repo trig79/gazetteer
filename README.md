@@ -1,8 +1,7 @@
-# bio_site
- My Personal Site
+# Gazetteer
 
- Gazetteer Project
- Create a mobile web app: 'a geographical dictionary or directory used in conjunction with a map or atlas. It typically contains information concerning the geographical makeup, social statistics and physical features of a country, region, or continent.'
+Gazetteer Project
+Create a mobile web app: 'a geographical dictionary or directory used in conjunction with a map or atlas. It typically contains information concerning the geographical makeup, social statistics and physical features of a country, region, or continent.'
 
 Frameworks/Plugins:
 
@@ -48,12 +47,12 @@ Key Function Flow:
 
     There are 3 main function flows for deliverying data to the user.
     1. Map Load     - User geo location provides Lat/Lng coords and calls the following.
-        i.   mapload 
+        i.   mapload
         ii.  Current Time API
         iii. openCage returns countrycode and calls:
                 i.  Covid
                 ii. Current News
-                iii.Triposo 
+                iii.Triposo
                 iv. Rest Countries returns country capital and calls:
                     i. Weather Api
     2. Map Click    - Provides Lat/Lng coords from onclick and calls as per above.
@@ -65,4 +64,4 @@ Key Function Flow:
                     i.   Covid
                     ii.  Current News
                     iii. Triposo
-                        
+
