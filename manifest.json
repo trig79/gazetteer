@@ -1,0 +1,17 @@
+{
+    "name": "Gazetteer",
+    "short_name": "Gazetteer",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#151515",
+    "description": "Information Map",
+    "theme_color": "#ff0077",
+    "icons": [
+      {
+        "src": "./android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+
