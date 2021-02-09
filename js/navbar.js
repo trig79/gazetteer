@@ -17,6 +17,8 @@ const navSlide = () => {
         })
     })
 
+
+
     // Activation/De-activation of Information Panes
     const infoImage = document.querySelector('.nav-info-icon')
     const infoClearIcon = document.querySelector('.info-clear-icon')

@@ -403,12 +403,18 @@
   /* .news-info-section h3 {
     text-align: center;
   } */
-  #news-div {
+  /* #news-div {
     margin-top: 14%;
+  } */
+  #news-info-header {
+    font-family: "Playfair Display", serif;
+    font-weight: 900;
+    font-size: 3rem;
   }
   .news-articles {
     display: flex;
     flex-wrap: wrap;
+    border-bottom: gray solid 2px;
   }
   .news-image {
     width: 35%;
@@ -419,9 +425,12 @@
     color: black;
   }
   .news-title {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
     font-size: 1.6rem;
   }
   .news-description {
+    font-family: "Droid Serif", serif;
     font-size: 1.2rem;
     /* float: right;
     width: 65%; */

@@ -7,17 +7,7 @@ window.addEventListener('load', e => {
 
 })
 
-async function registerSW() { 
-    if ('serviceWorker' in navigator) { 
-      try {
-        await navigator.serviceWorker.register('./sw.js'); 
-      } catch (e) {
-        alert('ServiceWorker registration failed. Sorry about that.'); 
-      }
-    } else {
-      document.querySelector('.alert').removeAttribute('hidden'); 
-    }
-  }
+
 
 const navSuccess = (position) => {
     let lon = position.coords.longitude.toFixed(2);
@@ -96,10 +86,12 @@ const preloader = () => {
 // 9.Current News
 // 10.Error Log
 
+let alpha2codeGlobal;
+
 
 // 1.Rest Countries
 const restCountriesSearch = (country, alpha2code, functionCalled) => {
-    //let capital;
+    alpha2codeGlobal = alpha2code
     $.ajax({
         url: "./php/restCountries.php",
         type: 'POST',
@@ -331,6 +323,13 @@ const openCage = (lat,lon, functionCalled) => {
 }
 
 // 4.Covid-19
+
+// const navCovid = document.querySelector('#nav-covid-icon');
+// navCovid.addEventListener('click', () => {
+//     covid19api(alpha2codeGlobal)
+// })
+
+
 const covid19api = (alpha2code) => {
 
     $.ajax({
@@ -372,6 +371,7 @@ const covid19api = (alpha2code) => {
                     <p id="covid-total-death-numbers" class="covid-numbers-class"> ${$totalDeath} </p>\
                 </div>\
             `)
+            //$('.loader-div').fadeOut(500)
             preloader()
             
         },
@@ -526,6 +526,13 @@ const triposoCities = (alpha2code) => {
 
 // 9.Current News
 //return top 20 news headlines and append then to the news DIV
+
+// const navNews = document.querySelector('#nav-news-icon');
+// navNews.addEventListener('click', () => {
+//     currentNews(alpha2codeGlobal)
+// })
+
+
 const currentNews = (alpha2code) => {
     $.ajax({
         url: "./php/newsApi.php",
@@ -552,21 +559,23 @@ const currentNews = (alpha2code) => {
                 !result['current_news']['articles'][i]['title']         ? 'No Info Avlb' : $title = result['current_news']['articles'][i]['title'];
                 !result['current_news']['articles'][i]['description']   ? 'No Info Avlb' : $description = result['current_news']['articles'][i]['description'];
                 !result['current_news']['articles'][i]['url']           ? 'No Info Avlb' : $url = result['current_news']['articles'][i]['url'];
-                !result['current_news']['articles'][i]['urlToImage']    ? 'No Info Avlb' : $image = result['current_news']['articles'][i]['urlToImage'];
+                //!result['current_news']['articles'][i]['urlToImage']    ? 'No Info Avlb' : $image = result['current_news']['articles'][i]['urlToImage'];
                 
                 // $title = result['current_news']['articles'][i]['title'];
                 // $description = result['current_news']['articles'][i]['description'];
                 // $url = result['current_news']['articles'][i]['url'];
                 // $image = result['current_news']['articles'][i]['urlToImage'];
 
-
+                //<a href="${$url}" class="news-link"><img src="${$image}" class="news-image">\
                 $('#news-div').append(`
-                    <div class="news-articles">\
-                    <a href="${$url}" class="news-link"><img src="${$image}" class="news-image">\
-                    <h3 class="news-title">${$title}'</h3>\
-                    <p class="news-description">${$description}</p></a>\
-                    </div>\
+                    <div class="news-articles">
+                    
+                    <h3 class="news-title">${$title}'</h3>
+                    <p class="news-description">${$description}</p></a>
+                    </div>
                  `)
+
+                 //$('.loader-div').fadeOut(500)
             }
         }
         },
