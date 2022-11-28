@@ -1,6 +1,6 @@
 # Gazetteer
 
-Gazetteer Project
+Gazetteer Project - Final Assignment Project
 Create a mobile web app: 'a geographical dictionary or directory used in conjunction with a map or atlas. It typically contains information concerning the geographical makeup, social statistics and physical features of a country, region, or continent.'
 
 Frameworks/Plugins:
